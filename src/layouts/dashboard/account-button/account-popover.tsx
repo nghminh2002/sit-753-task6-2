@@ -36,7 +36,6 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
       onClose?.();
       router.push(paths.index);
     } catch (err) {
-      console.error(err);
       toast.error('Something went wrong!');
     }
   }, [router, onClose]);

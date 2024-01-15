@@ -1,7 +1,7 @@
 import type { MouseEvent } from 'react';
 import { createContext } from 'react';
 
-const noop = (...args: any[]): any => {};
+const noop = (): any => {};
 
 interface ContextValue {
   anchorEl: HTMLElement | null;

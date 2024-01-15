@@ -20,7 +20,6 @@ const restoreSettings = (): Settings | null => {
       value = JSON.parse(restored);
     }
   } catch (err) {
-    console.error(err);
     // If stored data is not a strigified JSON this will fail,
     // that's why we catch the error
   }
@@ -32,7 +31,8 @@ const deleteSettings = (): void => {
   try {
     window.localStorage.removeItem(STORAGE_KEY);
   } catch (err) {
-    console.error(err);
+    // If stored data is not a strigified JSON this will fail,
+    // that's why we catch the error
   }
 };
 
@@ -40,7 +40,8 @@ const storeSettings = (value: Record<string, any>): void => {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
   } catch (err) {
-    console.error(err);
+    // If stored data is not a strigified JSON this will fail,
+    // that's why we catch the error
   }
 };
 
