@@ -22,10 +22,27 @@ import { OverviewJobs } from 'src/sections/dashboard/overview/overview-jobs';
 import { OverviewOpenTickets } from 'src/sections/dashboard/overview/overview-open-tickets';
 import { OverviewTips } from 'src/sections/dashboard/overview/overview-tips';
 
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from '../redux/store';
+import { login } from '../redux/slices/authentication';
+
 const now = new Date();
 
 const Page = () => {
+  const dispatch = useDispatch();
   const settings = useSettings();
+
+  const { loading } = useSelector((state) => state.authentication);
+
+  useEffect(() => {
+    const authenticate = async () => {
+      await dispatch(login());
+    };
+
+    authenticate();
+  }, [dispatch]);
+
+  if (loading) return <>Loading</>;
 
   return (
     <>

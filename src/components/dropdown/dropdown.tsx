@@ -19,27 +19,21 @@ export const Dropdown: FC<DropdownProps> = (props) => {
     setAnchorEl(event.currentTarget);
   }, []);
 
-  const handleTriggerLeave = useCallback(
-    (_: MouseEvent<HTMLElement>) => {
-      cleanupRef.current = setTimeout(() => {
-        setAnchorEl(null);
-      }, delay);
-    },
-    [delay]
-  );
+  const handleTriggerLeave = useCallback(() => {
+    cleanupRef.current = setTimeout(() => {
+      setAnchorEl(null);
+    }, delay);
+  }, [delay]);
 
-  const handleMenuEnter = useCallback((_: MouseEvent<HTMLElement>) => {
+  const handleMenuEnter = useCallback(() => {
     clearTimeout(cleanupRef.current);
   }, []);
 
-  const handleMenuLeave = useCallback(
-    (_: MouseEvent<HTMLElement>) => {
-      cleanupRef.current = setTimeout(() => {
-        setAnchorEl(null);
-      }, delay);
-    },
-    [delay]
-  );
+  const handleMenuLeave = useCallback(() => {
+    cleanupRef.current = setTimeout(() => {
+      setAnchorEl(null);
+    }, delay);
+  }, [delay]);
 
   const open = !!anchorEl;
 

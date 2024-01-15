@@ -49,9 +49,9 @@ export const useRouter = (): Router => {
       back: () => navigate(-1),
       forward: () => navigate(1),
       refresh: () => navigate(0),
-      push: (href: string, options?: NavigateOptions) => navigate(href),
-      replace: (href: string, options?: NavigateOptions) => navigate(href, { replace: true }),
-      prefetch: (href: string) => {},
+      push: (href: string) => navigate(href),
+      replace: (href: string) => navigate(href, { replace: true }),
+      prefetch: () => {},
     };
   }, [navigate]);
 };
