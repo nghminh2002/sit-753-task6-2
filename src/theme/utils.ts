@@ -1,7 +1,7 @@
 import type { PaletteColor } from '@mui/material/styles/createPalette';
 
 import type { ColorPreset } from '.';
-import { blue, green, indigo, purple } from './colors';
+import { blue, green, indigo, purple, yellow } from './colors';
 
 export const getPrimary = (preset?: ColorPreset): PaletteColor => {
   switch (preset) {
@@ -13,6 +13,8 @@ export const getPrimary = (preset?: ColorPreset): PaletteColor => {
       return indigo;
     case 'purple':
       return purple;
+    case 'yellow':
+      return yellow;
     default:
       return blue;
   }
