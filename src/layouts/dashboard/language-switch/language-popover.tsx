@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 
 import { tokens } from 'src/locales/tokens';
 
-type Language = 'en' | 'de' | 'es';
+type Language = 'en' | 'vi' ;
 
 type LanguageOptions = {
   [key in Language]: {
@@ -26,13 +26,9 @@ const languageOptions: LanguageOptions = {
     icon: '/assets/flags/flag-uk.svg',
     label: 'English',
   },
-  de: {
-    icon: '/assets/flags/flag-de.svg',
-    label: 'German',
-  },
-  es: {
-    icon: '/assets/flags/flag-es.svg',
-    label: 'Spanish',
+  vi: {
+    icon: '/assets/flags/flag-vi.svg',
+    label: 'Tiếng Việt',
   },
 };
 
