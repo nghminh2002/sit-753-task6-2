@@ -61,6 +61,15 @@ export const purple = withAlphas({
   contrastText: '#FFFFFF',
 });
 
+export const yellow = withAlphas({
+  lightest: '#FFF9ED',
+  light: '#FFF3DB',
+  main: '#FECC65',
+  dark: '#DEA42C',
+  darkest: '#C98D14',
+  contrastText: '#1B1F3B',
+});
+
 export const success = withAlphas({
   lightest: '#F0FDF9',
   light: '#3FC79A',
