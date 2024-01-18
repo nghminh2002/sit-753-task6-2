@@ -15,6 +15,10 @@ export default defineConfig({
         find: /^src(.+)/,
         replacement: path.join(process.cwd(), 'src/$1'),
       },
+      {
+        find: /^magic-story-book$/,
+        replacement: path.join(process.cwd(), 'node_modules/magic-story-book/src/stories'),
+      },
     ],
   },
   server: {
