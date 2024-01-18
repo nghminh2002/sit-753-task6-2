@@ -32,7 +32,7 @@ export const useSections = () => {
         items: [
           {
             title: t(tokens.nav.overview),
-            path: paths.index,
+            path: paths.dashboard.index,
             icon: (
               <SvgIcon fontSize="small">
                 <HomeSmileIcon />

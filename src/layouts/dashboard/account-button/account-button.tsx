@@ -4,14 +4,12 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import SvgIcon from '@mui/material/SvgIcon';
-
-import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { usePopover } from 'src/hooks/use-popover';
-
 import { AccountPopover } from './account-popover';
+import { useSelector } from 'src/redux/store';
 
 export const AccountButton: FC = () => {
-  const user = useMockedUser();
+  const { user } = useSelector((state) => state.user);
   const popover = usePopover<HTMLButtonElement>();
 
   return (
@@ -36,7 +34,7 @@ export const AccountButton: FC = () => {
             height: 32,
             width: 32,
           }}
-          src={user.avatar}
+          src={user?.avatar ? user.avatar : ''}
         >
           <SvgIcon>
             <User01Icon />

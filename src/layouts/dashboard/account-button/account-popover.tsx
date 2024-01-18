@@ -16,9 +16,10 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/components/router-link';
-import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { logout } from 'src/redux/slices/authentication';
 
 interface AccountPopoverProps {
   anchorEl: null | Element;
@@ -29,12 +30,14 @@ interface AccountPopoverProps {
 export const AccountPopover: FC<AccountPopoverProps> = (props) => {
   const { anchorEl, onClose, open, ...other } = props;
   const router = useRouter();
-  const user = useMockedUser();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   const handleLogout = useCallback(async (): Promise<void> => {
     try {
       onClose?.();
-      router.push(paths.index);
+      dispatch(logout());
+      router.push(paths.auth.login);
     } catch (err) {
       toast.error('Something went wrong!');
     }
@@ -54,12 +57,12 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
       {...other}
     >
       <Box sx={{ p: 2 }}>
-        <Typography variant="body1">{user.name}</Typography>
+        <Typography variant="body1">{user?.fullName ? user.fullName : 'User'}</Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          demo@devias.io
+          {user?.email ? user.email : ''}
         </Typography>
       </Box>
       <Divider />

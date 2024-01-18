@@ -8,7 +8,7 @@ export const Toaster: FC = () => {
 
   return (
     <HotToaster
-      position="bottom-right"
+      position="top-right"
       toastOptions={{
         style: {
           backdropFilter: 'blur(6px)',
@@ -16,6 +16,7 @@ export const Toaster: FC = () => {
           color: theme.palette.common.white,
           boxShadow: theme.shadows[16],
         },
+        duration: 5000,
       }}
     />
   );
