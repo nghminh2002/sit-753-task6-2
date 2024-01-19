@@ -1,0 +1,39 @@
+image: node:18-alpine
+
+stages:
+  - check_lint
+  - deploy
+
+.deploy-vercel:
+  image: 
+    name: node:18-alpine
+    entrypoint: [""]
+  stage: deploy
+  tags:
+    - starack-runner-002
+  script:
+    - npm install -g vercel
+    - VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=${PROJECT_ID} vercel --token $VERCEL_TOKEN
+
+lint_check:
+  stage: check_lint
+  tags:
+    - starack-runner-002
+  script:
+    - npm install
+    - npm run lint
+
+deploy_preview:
+  extends: .deploy-vercel
+  only:
+    - /^feature\/.*$/
+  variables:
+    PROJECT_ID: $VERCEL_PROJECT_ID
+        
+deploy_staging:
+  extends: .deploy-vercel
+  only:
+    - develop
+  variables:
+    PROJECT_ID: $VERCEL_PROJECT_ID_STAGING
+        
