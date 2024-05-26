@@ -83,7 +83,7 @@ const ForgotPasswordPage = () => {
             variant="body2"
           >
             {forgotEmailSent
-              ? `If there is a PTE Magic account registered to ${formik.values.email} we have sent instructions for how to reset your password.`
+              ? `If there is a account registered to ${formik.values.email} we have sent instructions for how to reset your password.`
               : 'Please insert your email in the input below and we will send an email with the link to reset your password.'}
           </Typography>
         </Stack>
