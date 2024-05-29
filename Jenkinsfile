@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        imageName = "millytest"
+        imageName = "millytest1"
     }
     stages {
         // stage('Build') {
