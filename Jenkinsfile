@@ -28,7 +28,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    docker.withDockerRegistry("https://registry.hub.docker.com", registryCredential) {
+                    docker.withDockerRegistry("https://registry.hub.docker.com", 'millydocker') {
                         dockerImage.push()
                     }
                 }
