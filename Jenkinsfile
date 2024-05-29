@@ -1,12 +1,24 @@
 pipeline {
     agent any
-
+    tools{
+        nodejs "node"
+    }
+    environment {
+        imageName = "millytest"
+    }
     stages {
-        stage('Build') {
+        // stage('Build') {
+        //     steps {
+        //         sh 'npm install -g npm@10.8.0 '
+        //         sh 'npm install'
+        //         sh 'npm run build'
+        //     }
+        // }
+        stage('Build Images') {
             steps {
-                sh 'npm install -g npm@10.8.0 '
-                sh 'npm install'
-                sh 'npm run build'
+                script {
+                    dockerImage = docker.build imageName
+                }
             }
         }
         stage('Test') {
