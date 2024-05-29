@@ -15,11 +15,11 @@ pipeline {
         // }
         stage('Test') {
             steps {
-                sh 'npm install'
+                sh '/opt/homebrew/bin/npm install'
                 echo "run unit tests with Jest"
-                sh 'npm run test'
+                sh '/opt/homebrew/bin/npm run test'
                 echo "code analysis with Eslint"
-                sh 'npm run lint'
+                sh '/opt/homebrew/bin/npm run lint'
             }
             post {
                 always {
