@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    tools {nodejs "nodejs"}
     environment {
         imageName = "millytest1"
     }
@@ -14,11 +15,11 @@ pipeline {
         // }
         stage('Test') {
             steps {
-                sh '/opt/homebrew/bin/npm install'
+                sh 'npm install'
                 echo "run unit tests with Jest"
-                sh '/opt/homebrew/bin/npm run test'
+                sh 'npm run test'
                 echo "code analysis with Eslint"
-                sh '/opt/homebrew/bin/npm run lint'
+                sh 'npm run lint'
             }
             post {
                 always {
