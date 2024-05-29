@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    tools {nodejs "nodejs"}
     environment {
         imageName = "millytest1"
     }
