@@ -9,7 +9,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "strictNullChecks": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -20,9 +20,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es6",
-    "types": ["vite/client"],
+    "types": ["jest", "node", "vite/client"],
     "useUnknownInCatchVariables": false
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.test.jsx", "setupTests.ts", "src/utils/formatIndex.test.jsx"],
   "exclude": ["node_modules"]
 }

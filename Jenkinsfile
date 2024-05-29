@@ -5,26 +5,20 @@ pipeline {
     }
     stages {
         // stage('Build') {
+        //     agent any
         //     steps {
-        //         sh 'npm install -g npm@10.8.0 '
-        //         sh 'npm install'
-        //         sh 'npm run build'
+        //         script {
+        //             dockerImage = docker.build imageName
+        //         }
         //     }
         // }
-        stage('Build Images') {
-            agent any
-            steps {
-                script {
-                    dockerImage = docker.build imageName
-                }
-            }
-        }
         stage('Test') {
             steps {
+                sh 'npm install'
                 echo "run unit tests with Jest"
-                echo "run integration tests with Cypress"
+                sh 'npm run test'
                 echo "code analysis with Eslint"
-                echo 'security scan with SonarCloud.'
+                sh 'npm run lint'
             }
             post {
                 always {
@@ -35,6 +29,11 @@ pipeline {
                                 attachLog: true
                     }
                 }
+            }
+        }
+        stage('Code Quality Analysis') {
+            steps {
+                echo 'security scan with SonarCloud.'
             }
         }
         stage('Deploy') {
