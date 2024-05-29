@@ -3,7 +3,7 @@ pipeline {
     tools {nodejs "nodejs"}
     environment {
         imageName = "millynguyen/milly-test"
-        registryCredential = 'millydocker'
+        registryCredential = 'millynguyen'
         dockerImage = ''
     }
     stages {
@@ -28,7 +28,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    docker.withDockerRegistry("https://registry.hub.docker.com", 'millydocker') {
+                    docker.withRegistry("https://registry.hub.docker.com", 'millydocker') {
                         dockerImage.push()
                     }
                 }
