@@ -2,17 +2,19 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
     environment {
-        imageName = "millytest1"
+        imageName = "millynguyen/milly-test"
+        registryCredential = 'millydocker'
+        dockerImage = ''
     }
     stages {
-        // stage('Build') {
-        //     agent any
-        //     steps {
-        //         script {
-        //             dockerImage = docker.build imageName
-        //         }
-        //     }
-        // }
+        stage('Build') {
+            agent any
+            steps {
+                script {
+                    dockerImage = docker.build imageName
+                }
+            }
+        }
         stage('Test') {
             steps {
                 sh 'npm install'
@@ -21,13 +23,13 @@ pipeline {
                 echo "code analysis with Eslint"
                 sh 'npm run lint'
             }
-            post {
-                always {
-                    script {
-                        emailext body: "Build ${currentBuild.result}: ${env.JOB_NAME} #${env.BUILD_NUMBER}\n\nConsole output is attached.", 
-                                subject: "${env.JOB_NAME} #${env.BUILD_NUMBER}: Build ${currentBuild.result}: ", 
-                                mimeType: 'text/html', to: 's220466717@deakin.edu.au', 
-                                attachLog: true
+        }
+        stage('Deploy Image') {
+            agent any
+            steps {
+                script {
+                    docker.withDockerRegistry("https://registry.hub.docker.com", registryCredential) {
+                        dockerImage.push()
                     }
                 }
             }
