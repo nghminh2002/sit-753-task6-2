@@ -12,6 +12,7 @@ pipeline {
         //     }
         // }
         stage('Build Images') {
+            agent any
             steps {
                 script {
                     dockerImage = docker.build imageName
