@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'npm install -g npm@10.8.0 '
+                sh 'npm install'
                 sh 'npm run build'
             }
         }
