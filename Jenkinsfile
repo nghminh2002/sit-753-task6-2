@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    tools {
-        nodejs "nodejs"
-        sonarRunner 'SonnarCloud'
-    }
+    tools { nodejs "nodejs" }
     environment {
         dockerImage = ''
         VERCEL_TOKEN = credentials('vercel-token')
@@ -12,6 +9,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonarcloud-token')
         SONAR_PROJECT_KEY = 'nghminh2002_sit-753-task6-2'
         SONAR_ORG = 'nghminh2002'
+        SONAR_TOOL = tool name: 'SonnarCloud', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
     stages {
         // stage('Build') {
@@ -36,7 +34,7 @@ pipeline {
         stage('Code Quality Analysis') {
             steps {
                 script {
-                    scannerHome = tool name: 'SonnarCloud', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    scannerHome = '$SONAR_TOOL'
                 }
                 withSonarQubeEnv('SonarCloud') {
                     sh '${scannerHome}/bin/sonar-scanner \
