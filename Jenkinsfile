@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    tools {nodejs "nodejs"}
+    tools {
+        nodejs "nodejs"
+        sonarQubeScanner scannerHome
+    }
     environment {
         dockerImage = ''
         VERCEL_TOKEN = credentials('vercel-token')
@@ -32,6 +35,9 @@ pipeline {
         }
         stage('Code Quality Analysis') {
             steps {
+                script {
+                    scannerHome = tool '<sonarqubeScannerInstallation>'
+                }
                 withSonarQubeEnv('SonarCloud') {
                     sh '${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=$SONAR_PROJECT_KEY \
