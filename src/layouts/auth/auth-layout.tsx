@@ -121,7 +121,7 @@ export const Layout: FC<LayoutProps> = (props) => {
                   lineHeight: 2.5,
                 }}
               >
-                MILLY-NGUYEN-SIT753-TASK-6-2
+                Hello, I'm Milly
               </Box>
             </Stack>
           </Box>
