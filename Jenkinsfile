@@ -34,10 +34,11 @@ pipeline {
         stage('Code Quality Analysis') {
             steps {
                 sh '/opt/homebrew/bin/sonar-scanner \
-                    -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.login=feb2c84dacaf080d46ac52214edd1b32f8784b7a'
+                    -D sonar.projectKey=nghminh2002_sit-753-task6-2 \
+                    -D sonar.sources=. \
+                    -D sonar.host.url=http://localhost:9000 \
+                    -D sonar.login=admin
+                    -D sonar.password=admin123'
             }
         }
         // stage('Deploy') {
