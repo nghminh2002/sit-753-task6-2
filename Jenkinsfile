@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
     environment {
-        imageName = "millynguyen/milly-test"
         registryCredential = 'millynguyen'
         dockerImage = ''
     }
@@ -11,7 +10,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    dockerImage = docker.build imageName:"${env.BUILD_ID}"
+                    dockerImage = docker.build("millynguyen/milly-test:${env.BUILD_ID}")
                 }
             }
         }
