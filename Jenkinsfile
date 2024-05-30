@@ -11,7 +11,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    dockerImage = docker.build imageName
+                    dockerImage = docker.build(imageName:${env.BUILD_ID})
                 }
             }
         }
