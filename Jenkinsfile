@@ -2,13 +2,16 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
     environment {
-        registryCredential = 'millynguyen'
+        // registryCredential = 'millynguyen'
         dockerImage = ''
     }
     stages {
         stage('Build') {
-            agent any
             steps {
+                sh 'npm install'
+                echo "Run build to check if the code is valid"
+                sh 'npm run build'
+                echo "Build Docker Image"
                 script {
                     dockerImage = docker.build("millynguyen/milly-test:${env.BUILD_ID}")
                 }
@@ -16,16 +19,20 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm install'
-                echo "run unit tests with Jest"
+                echo "Run unit tests with Jest"
                 sh 'npm run test'
-                echo "code analysis with Eslint"
+                echo "Code analysis with Eslint"
                 sh 'npm run lint'
             }
         }
-        stage('Deploy Image') {
-            agent any
+        stage('Code Quality Analysis') {
             steps {
+                echo "Code quality analysis with SonarCloud"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deploy to  DockerHub"
                 script {
                     docker.withRegistry("https://registry.hub.docker.com", 'millydocker') {
                         dockerImage.push()
@@ -34,19 +41,9 @@ pipeline {
                 }
             }
         }
-        stage('Code Quality Analysis') {
-            steps {
-                echo 'security scan with SonarCloud.'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo "deploy to staging with AWS EC2"
-            }
-        }
         stage('Release') {
             steps {
-                echo "deploy to production with AWS EC2"
+                echo "deploy to production with Vercel"
             }
         }
     }
