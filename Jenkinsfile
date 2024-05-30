@@ -2,8 +2,10 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
     environment {
-        // registryCredential = 'millynguyen'
         dockerImage = ''
+        VERCEL_TOKEN = credentials('vercel-token')
+        VERCEL_ORG_ID = credentials('vercel-org-id')
+        VERCEL_PROJECT_ID = credentials('vercel-prj-id')
     }
     stages {
         stage('Build') {
@@ -43,7 +45,9 @@ pipeline {
         }
         stage('Release') {
             steps {
-                echo "deploy to production with Vercel"
+                echo "Release to production with Vercel"
+                sh 'npm install -g vercel'
+                sh 'VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --token $VERCEL_TOKEN --prod'
             }
         }
     }
