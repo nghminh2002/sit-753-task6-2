@@ -30,6 +30,7 @@ pipeline {
                     docker.withRegistry("https://registry.hub.docker.com", 'millydocker') {
                         dockerImage.push()
                     }
+                sh "docker rmi -f millynguyen/milly-test:${env.BUILD_ID}"
                 }
             }
         }
