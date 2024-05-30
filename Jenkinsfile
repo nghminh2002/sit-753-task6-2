@@ -8,8 +8,8 @@ pipeline {
         VERCEL_PROJECT_ID = credentials('vercel-prj-id')
         SONAR_TOKEN = credentials('sonarcloud-token')
         SONAR_PROJECT_KEY = 'nghminh2002_sit-753-task6-2'
-        SONAR_ORG = 'nghminh2002'
-        SONAR_TOOL = tool name: 'SonnarCloud', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        // SONAR_ORG = 'nghminh2002'
+        // SONAR_TOOL = tool name: 'SonnarCloud', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
     stages {
         // stage('Build') {
@@ -33,17 +33,11 @@ pipeline {
         // }
         stage('Code Quality Analysis') {
             steps {
-                script {
-                    scannerHome = '$SONAR_TOOL'
-                }
-                withSonarQubeEnv('SonarCloud') {
-                    sh '/opt/homebrew/bin/sonar-scanner \
-                        -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-                        -Dsonar.organization=$SONAR_ORG \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=https://sonarcloud.io \
-                        -Dsonar.login=$SONAR_TOKEN'
-                }
+                sh '/opt/homebrew/bin/sonar-scanner \
+                    -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://localhost:9000 \
+                    -Dsonar.login=feb2c84dacaf080d46ac52214edd1b32f8784b7a'
             }
         }
         // stage('Deploy') {
