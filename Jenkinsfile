@@ -33,7 +33,7 @@ pipeline {
         stage('Code Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarCloud') {
-                    sh 'sonar-scanner \
+                    sh '${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=$SONAR_PROJECT_KEY \
                         -Dsonar.organization=$SONAR_ORG \
                         -Dsonar.sources=. \
