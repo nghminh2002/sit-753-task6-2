@@ -6,6 +6,9 @@ pipeline {
         VERCEL_TOKEN = credentials('vercel-token')
         VERCEL_ORG_ID = credentials('vercel-org-id')
         VERCEL_PROJECT_ID = credentials('vercel-prj-id')
+        SONAR_TOKEN = credentials('sonarcloud-token')
+        SONAR_PROJECT_KEY = 'nghminh2002_sit-753-task6-2'
+        SONAR_ORG = 'nghminh2002'
     }
     stages {
         stage('Build') {
@@ -29,7 +32,14 @@ pipeline {
         }
         stage('Code Quality Analysis') {
             steps {
-                echo "Code quality analysis with SonarCloud"
+                withSonarQubeEnv('SonarCloud') {
+                    sh 'sonar-scanner \
+                        -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+                        -Dsonar.organization=$SONAR_ORG \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=https://sonarcloud.io \
+                        -Dsonar.login=$SONAR_TOKEN'
+                }
             }
         }
         stage('Deploy') {
