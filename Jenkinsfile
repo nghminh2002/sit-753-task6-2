@@ -37,7 +37,7 @@ pipeline {
                     scannerHome = '$SONAR_TOOL'
                 }
                 withSonarQubeEnv('SonarCloud') {
-                    sh '${scannerHome}/bin/sonar-scanner \
+                    sh '/opt/homebrew/bin/sonar-scanner \
                         -Dsonar.projectKey=$SONAR_PROJECT_KEY \
                         -Dsonar.organization=$SONAR_ORG \
                         -Dsonar.sources=. \
